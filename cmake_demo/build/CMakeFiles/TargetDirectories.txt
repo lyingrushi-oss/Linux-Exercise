@@ -1,0 +1,4 @@
+/home/lin/embedded/cmake_demo/build/CMakeFiles/sensor.dir
+/home/lin/embedded/cmake_demo/build/CMakeFiles/sensor_app.dir
+/home/lin/embedded/cmake_demo/build/CMakeFiles/edit_cache.dir
+/home/lin/embedded/cmake_demo/build/CMakeFiles/rebuild_cache.dir
