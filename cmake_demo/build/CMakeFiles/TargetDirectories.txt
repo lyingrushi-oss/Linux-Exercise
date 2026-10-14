@@ -1,4 +1,11 @@
-/home/lin/embedded/cmake_demo/build/CMakeFiles/sensor.dir
-/home/lin/embedded/cmake_demo/build/CMakeFiles/sensor_app.dir
 /home/lin/embedded/cmake_demo/build/CMakeFiles/edit_cache.dir
 /home/lin/embedded/cmake_demo/build/CMakeFiles/rebuild_cache.dir
+/home/lin/embedded/cmake_demo/build/protocol/CMakeFiles/crc.dir
+/home/lin/embedded/cmake_demo/build/protocol/CMakeFiles/edit_cache.dir
+/home/lin/embedded/cmake_demo/build/protocol/CMakeFiles/rebuild_cache.dir
+/home/lin/embedded/cmake_demo/build/driver/CMakeFiles/sensor.dir
+/home/lin/embedded/cmake_demo/build/driver/CMakeFiles/edit_cache.dir
+/home/lin/embedded/cmake_demo/build/driver/CMakeFiles/rebuild_cache.dir
+/home/lin/embedded/cmake_demo/build/app/CMakeFiles/sensor_app.dir
+/home/lin/embedded/cmake_demo/build/app/CMakeFiles/edit_cache.dir
+/home/lin/embedded/cmake_demo/build/app/CMakeFiles/rebuild_cache.dir

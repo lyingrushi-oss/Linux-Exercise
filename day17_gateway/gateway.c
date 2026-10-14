@@ -10,11 +10,14 @@
 #include <netinet/in.h>
 #include <stdbool.h>
 #include <stdatomic.h>
+#include <signal.h>
 
 //定义TCP连接端口号
 #define PORT 9000
 //定义样本数量
 #define SAMPLE_COUNT 10
+
+#define EXIT_FAILURE 1
 
 //定义传感器数据结构体
 typedef struct{
@@ -33,13 +36,38 @@ typedef enum{
 
 static int sensor_pipe[2];
 static atomic_bool stop_requested=ATOMIC_VAR_INIT(false);
+//定义信号退出标志
+static volatile sig_atomic_t  signal_stop=0;
 
 static int create_listen_socket(uint16_t port);
 
 static void* producer_pthread(void* arg);
 
+//退出信号处理函数
+static void handler_stop_signal(int signo);
+
 int main(void)
 {
+
+    //创建资源前创建信号结构体
+    struct sigaction sa={0};
+    sa.sa_handler=handler_stop_signal;
+    sigemptyset(&sa.sa_mask);//执行处理函数需要暂时屏蔽的其他信号集合
+    sa.sa_flags=0;
+
+    //信号处理，行为绑定
+    if(sigaction(SIGINT,&sa,NULL)==-1)
+    {
+        perror("sigaction SIGINT");
+        return EXIT_FAILURE;
+    }
+    if(sigaction(SIGTERM,&sa,NULL)==-1)
+    {
+        perror("sigaction SIGTERM");
+        return EXIT_FAILURE;
+    }
+
+
     //创建sensor_pipe
     int ret=pipe(sensor_pipe);
 
@@ -103,12 +131,24 @@ int main(void)
 
     while(!finished)
     {
+        if(signal_stop)
+        {
+            printf("[main] stop signal received\n");
+            finished=1;
+            break;
+        }
         int ready=poll(fds,FD_COUNT,-1);
         if(ready==-1)
         {
             //判断是不是中断导致
-            if(ready==EINTR)
+            if(errno==EINTR)
             {
+                if(signal_stop)
+                {
+                    printf("[main] poll interrupted by stop signal\n");
+                    finished=1;
+                   
+                }
                 continue;//重新阻塞等待
             }
             //出错
@@ -453,5 +493,14 @@ static void* producer_pthread(void* arg)
     close(sensor_pipe[1]);
     printf("[producer] finished\n");
     return NULL;
+
+}
+
+/// @brief 退出信号处理函数，只置位
+/// @param signo 
+static void handler_stop_signal(int signo)
+{
+    (void)signo;
+    signal_stop=1;
 
 }

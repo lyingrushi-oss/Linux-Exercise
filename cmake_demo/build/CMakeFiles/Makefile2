@@ -63,70 +63,146 @@ CMAKE_BINARY_DIR = /home/lin/embedded/cmake_demo/build
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/sensor.dir/all
-all: CMakeFiles/sensor_app.dir/all
+all: protocol/all
+all: driver/all
+all: app/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
-preinstall:
+preinstall: protocol/preinstall
+preinstall: driver/preinstall
+preinstall: app/preinstall
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/sensor.dir/clean
-clean: CMakeFiles/sensor_app.dir/clean
+clean: protocol/clean
+clean: driver/clean
+clean: app/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/sensor.dir
+# Directory level rules for directory app
+
+# Recursive "all" directory target.
+app/all: app/CMakeFiles/sensor_app.dir/all
+.PHONY : app/all
+
+# Recursive "preinstall" directory target.
+app/preinstall:
+.PHONY : app/preinstall
+
+# Recursive "clean" directory target.
+app/clean: app/CMakeFiles/sensor_app.dir/clean
+.PHONY : app/clean
+
+#=============================================================================
+# Directory level rules for directory driver
+
+# Recursive "all" directory target.
+driver/all: driver/CMakeFiles/sensor.dir/all
+.PHONY : driver/all
+
+# Recursive "preinstall" directory target.
+driver/preinstall:
+.PHONY : driver/preinstall
+
+# Recursive "clean" directory target.
+driver/clean: driver/CMakeFiles/sensor.dir/clean
+.PHONY : driver/clean
+
+#=============================================================================
+# Directory level rules for directory protocol
+
+# Recursive "all" directory target.
+protocol/all: protocol/CMakeFiles/crc.dir/all
+.PHONY : protocol/all
+
+# Recursive "preinstall" directory target.
+protocol/preinstall:
+.PHONY : protocol/preinstall
+
+# Recursive "clean" directory target.
+protocol/clean: protocol/CMakeFiles/crc.dir/clean
+.PHONY : protocol/clean
+
+#=============================================================================
+# Target rules for target protocol/CMakeFiles/crc.dir
 
 # All Build rule for target.
-CMakeFiles/sensor.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sensor.dir/build.make CMakeFiles/sensor.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sensor.dir/build.make CMakeFiles/sensor.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/lin/embedded/cmake_demo/build/CMakeFiles --progress-num=1,2 "Built target sensor"
-.PHONY : CMakeFiles/sensor.dir/all
+protocol/CMakeFiles/crc.dir/all:
+	$(MAKE) $(MAKESILENT) -f protocol/CMakeFiles/crc.dir/build.make protocol/CMakeFiles/crc.dir/depend
+	$(MAKE) $(MAKESILENT) -f protocol/CMakeFiles/crc.dir/build.make protocol/CMakeFiles/crc.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/lin/embedded/cmake_demo/build/CMakeFiles --progress-num=1,2 "Built target crc"
+.PHONY : protocol/CMakeFiles/crc.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/sensor.dir/rule: cmake_check_build_system
+protocol/CMakeFiles/crc.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/lin/embedded/cmake_demo/build/CMakeFiles 2
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/sensor.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 protocol/CMakeFiles/crc.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/lin/embedded/cmake_demo/build/CMakeFiles 0
-.PHONY : CMakeFiles/sensor.dir/rule
+.PHONY : protocol/CMakeFiles/crc.dir/rule
 
 # Convenience name for target.
-sensor: CMakeFiles/sensor.dir/rule
+crc: protocol/CMakeFiles/crc.dir/rule
+.PHONY : crc
+
+# clean rule for target.
+protocol/CMakeFiles/crc.dir/clean:
+	$(MAKE) $(MAKESILENT) -f protocol/CMakeFiles/crc.dir/build.make protocol/CMakeFiles/crc.dir/clean
+.PHONY : protocol/CMakeFiles/crc.dir/clean
+
+#=============================================================================
+# Target rules for target driver/CMakeFiles/sensor.dir
+
+# All Build rule for target.
+driver/CMakeFiles/sensor.dir/all: protocol/CMakeFiles/crc.dir/all
+	$(MAKE) $(MAKESILENT) -f driver/CMakeFiles/sensor.dir/build.make driver/CMakeFiles/sensor.dir/depend
+	$(MAKE) $(MAKESILENT) -f driver/CMakeFiles/sensor.dir/build.make driver/CMakeFiles/sensor.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/lin/embedded/cmake_demo/build/CMakeFiles --progress-num=3,4 "Built target sensor"
+.PHONY : driver/CMakeFiles/sensor.dir/all
+
+# Build rule for subdir invocation for target.
+driver/CMakeFiles/sensor.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lin/embedded/cmake_demo/build/CMakeFiles 4
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 driver/CMakeFiles/sensor.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lin/embedded/cmake_demo/build/CMakeFiles 0
+.PHONY : driver/CMakeFiles/sensor.dir/rule
+
+# Convenience name for target.
+sensor: driver/CMakeFiles/sensor.dir/rule
 .PHONY : sensor
 
 # clean rule for target.
-CMakeFiles/sensor.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sensor.dir/build.make CMakeFiles/sensor.dir/clean
-.PHONY : CMakeFiles/sensor.dir/clean
+driver/CMakeFiles/sensor.dir/clean:
+	$(MAKE) $(MAKESILENT) -f driver/CMakeFiles/sensor.dir/build.make driver/CMakeFiles/sensor.dir/clean
+.PHONY : driver/CMakeFiles/sensor.dir/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/sensor_app.dir
+# Target rules for target app/CMakeFiles/sensor_app.dir
 
 # All Build rule for target.
-CMakeFiles/sensor_app.dir/all: CMakeFiles/sensor.dir/all
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sensor_app.dir/build.make CMakeFiles/sensor_app.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sensor_app.dir/build.make CMakeFiles/sensor_app.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/lin/embedded/cmake_demo/build/CMakeFiles --progress-num=3,4 "Built target sensor_app"
-.PHONY : CMakeFiles/sensor_app.dir/all
+app/CMakeFiles/sensor_app.dir/all: protocol/CMakeFiles/crc.dir/all
+app/CMakeFiles/sensor_app.dir/all: driver/CMakeFiles/sensor.dir/all
+	$(MAKE) $(MAKESILENT) -f app/CMakeFiles/sensor_app.dir/build.make app/CMakeFiles/sensor_app.dir/depend
+	$(MAKE) $(MAKESILENT) -f app/CMakeFiles/sensor_app.dir/build.make app/CMakeFiles/sensor_app.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/lin/embedded/cmake_demo/build/CMakeFiles --progress-num=5,6 "Built target sensor_app"
+.PHONY : app/CMakeFiles/sensor_app.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/sensor_app.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lin/embedded/cmake_demo/build/CMakeFiles 4
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/sensor_app.dir/all
+app/CMakeFiles/sensor_app.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lin/embedded/cmake_demo/build/CMakeFiles 6
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 app/CMakeFiles/sensor_app.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/lin/embedded/cmake_demo/build/CMakeFiles 0
-.PHONY : CMakeFiles/sensor_app.dir/rule
+.PHONY : app/CMakeFiles/sensor_app.dir/rule
 
 # Convenience name for target.
-sensor_app: CMakeFiles/sensor_app.dir/rule
+sensor_app: app/CMakeFiles/sensor_app.dir/rule
 .PHONY : sensor_app
 
 # clean rule for target.
-CMakeFiles/sensor_app.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sensor_app.dir/build.make CMakeFiles/sensor_app.dir/clean
-.PHONY : CMakeFiles/sensor_app.dir/clean
+app/CMakeFiles/sensor_app.dir/clean:
+	$(MAKE) $(MAKESILENT) -f app/CMakeFiles/sensor_app.dir/build.make app/CMakeFiles/sensor_app.dir/clean
+.PHONY : app/CMakeFiles/sensor_app.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

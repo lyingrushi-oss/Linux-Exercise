@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/sensor_app.dir/main.c.o -o sensor_app  ../driver/libsensor.a ../protocol/libcrc.a 

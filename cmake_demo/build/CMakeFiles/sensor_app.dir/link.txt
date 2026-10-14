@@ -1,1 +1,0 @@
-/usr/bin/cc CMakeFiles/sensor_app.dir/src/main.c.o -o sensor_app  libsensor.a 

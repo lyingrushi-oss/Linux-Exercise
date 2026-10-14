@@ -117,6 +117,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named crc
+
+# Build rule for target.
+crc: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 crc
+.PHONY : crc
+
+# fast build rule for target.
+crc/fast:
+	$(MAKE) $(MAKESILENT) -f protocol/CMakeFiles/crc.dir/build.make protocol/CMakeFiles/crc.dir/build
+.PHONY : crc/fast
+
+#=============================================================================
 # Target rules for targets named sensor
 
 # Build rule for target.
@@ -126,7 +139,7 @@ sensor: cmake_check_build_system
 
 # fast build rule for target.
 sensor/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sensor.dir/build.make CMakeFiles/sensor.dir/build
+	$(MAKE) $(MAKESILENT) -f driver/CMakeFiles/sensor.dir/build.make driver/CMakeFiles/sensor.dir/build
 .PHONY : sensor/fast
 
 #=============================================================================
@@ -139,56 +152,8 @@ sensor_app: cmake_check_build_system
 
 # fast build rule for target.
 sensor_app/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sensor_app.dir/build.make CMakeFiles/sensor_app.dir/build
+	$(MAKE) $(MAKESILENT) -f app/CMakeFiles/sensor_app.dir/build.make app/CMakeFiles/sensor_app.dir/build
 .PHONY : sensor_app/fast
-
-src/main.o: src/main.c.o
-.PHONY : src/main.o
-
-# target to build an object file
-src/main.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sensor_app.dir/build.make CMakeFiles/sensor_app.dir/src/main.c.o
-.PHONY : src/main.c.o
-
-src/main.i: src/main.c.i
-.PHONY : src/main.i
-
-# target to preprocess a source file
-src/main.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sensor_app.dir/build.make CMakeFiles/sensor_app.dir/src/main.c.i
-.PHONY : src/main.c.i
-
-src/main.s: src/main.c.s
-.PHONY : src/main.s
-
-# target to generate assembly for a file
-src/main.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sensor_app.dir/build.make CMakeFiles/sensor_app.dir/src/main.c.s
-.PHONY : src/main.c.s
-
-src/sensor.o: src/sensor.c.o
-.PHONY : src/sensor.o
-
-# target to build an object file
-src/sensor.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sensor.dir/build.make CMakeFiles/sensor.dir/src/sensor.c.o
-.PHONY : src/sensor.c.o
-
-src/sensor.i: src/sensor.c.i
-.PHONY : src/sensor.i
-
-# target to preprocess a source file
-src/sensor.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sensor.dir/build.make CMakeFiles/sensor.dir/src/sensor.c.i
-.PHONY : src/sensor.c.i
-
-src/sensor.s: src/sensor.c.s
-.PHONY : src/sensor.s
-
-# target to generate assembly for a file
-src/sensor.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sensor.dir/build.make CMakeFiles/sensor.dir/src/sensor.c.s
-.PHONY : src/sensor.c.s
 
 # Help Target
 help:
@@ -198,14 +163,9 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... crc"
 	@echo "... sensor"
 	@echo "... sensor_app"
-	@echo "... src/main.o"
-	@echo "... src/main.i"
-	@echo "... src/main.s"
-	@echo "... src/sensor.o"
-	@echo "... src/sensor.i"
-	@echo "... src/sensor.s"
 .PHONY : help
 
 

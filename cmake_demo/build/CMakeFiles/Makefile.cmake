@@ -8,8 +8,11 @@ set(CMAKE_DEPENDS_GENERATOR "Unix Makefiles")
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
   "/home/lin/embedded/cmake_demo/CMakeLists.txt"
+  "/home/lin/embedded/cmake_demo/app/CMakeLists.txt"
   "CMakeFiles/3.28.3/CMakeCCompiler.cmake"
   "CMakeFiles/3.28.3/CMakeSystem.cmake"
+  "/home/lin/embedded/cmake_demo/driver/CMakeLists.txt"
+  "/home/lin/embedded/cmake_demo/protocol/CMakeLists.txt"
   "/usr/share/cmake-3.28/Modules/CMakeCInformation.cmake"
   "/usr/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake"
   "/usr/share/cmake-3.28/Modules/CMakeGenericSystem.cmake"
@@ -36,10 +39,14 @@ set(CMAKE_MAKEFILE_OUTPUTS
 # Byproducts of CMake generate step:
 set(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/CMakeDirectoryInformation.cmake"
+  "protocol/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "driver/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "app/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/sensor.dir/DependInfo.cmake"
-  "CMakeFiles/sensor_app.dir/DependInfo.cmake"
+  "protocol/CMakeFiles/crc.dir/DependInfo.cmake"
+  "driver/CMakeFiles/sensor.dir/DependInfo.cmake"
+  "app/CMakeFiles/sensor_app.dir/DependInfo.cmake"
   )
