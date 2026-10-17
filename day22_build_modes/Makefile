@@ -1,0 +1,43 @@
+# 编译器
+CC := gcc
+
+# 编译配置
+COMMON_FLAGS := -std=c11 -Wextra -Wall -O0 -g
+DEBUG_FLAGS := $(COMMON_FLAGS)
+ASAN_FLAGS := $(COMMON_FLAGS) -fsanitize=address -fno-omit-frame-pointer
+
+#伪目标phony target，不是我们真正想构建的目标文件，只是操作入口名字
+.PHONY: all debug asan clean
+#.PHONY: clean 不要把clean当文件名看到有叫clean的文件夹跳过命令，而是执行清理操作
+
+# 构建入口:给入口起别名
+all: debug asan	#默认入口
+debug: build/debug/sensor_app
+asan: build/asan/sensor_app
+
+# 链接debug程序
+build/debug/sensor_app: build/debug/main.o build/debug/sensor.o
+	$(CC) $(DEBUG_FLAGS) $^ -o $@
+
+# 链接asan程序
+build/asan/sensor_app: build/asan/main.o build/asan/sensor.o
+	$(CC) $(ASAN_FLAGS) $^ -o $@
+
+# 编译成debug目标文件
+build/debug/%.o: %.c sensor.h
+	mkdir -p build/debug
+	$(CC) $(DEBUG_FLAGS) -c $< -o $@
+
+#编译成asan目标文件
+build/asan/%.o: %.c sensor.h
+	mkdir -p build/asan
+	$(CC) $(ASAN_FLAGS) -c $< -o $@
+
+#删除所有构建文件，make clean:执行清理动作
+clean:
+	rm -rf build
+
+
+
+
+
