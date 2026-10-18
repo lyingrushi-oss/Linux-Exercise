@@ -1,4 +1,5 @@
 #include "sensor.h"
+#include "config.h"
 
 float sensor_average(const float* sample,int count)
 {
@@ -10,5 +11,5 @@ float sensor_average(const float* sample,int count)
         sum+=sample[i];
     }
 
-    return sum /count;
+    return sum /count+SENSOR_OFFSET;
 }
