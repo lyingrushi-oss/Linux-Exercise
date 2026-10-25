@@ -161,6 +161,10 @@ static int read_sensor_file(const char* path,char* buf,size_t capacity)
         //读取失败
         if(n==-1)
         {
+            if(errno==EINTR)
+            {
+                continue;
+            }
             log_error("sensor file read failed",path);
             close(fd);
             return -1;
