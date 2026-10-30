@@ -1,9 +1,20 @@
+#define _POSIX_C_SOURCE 200809L
+
 #include <stdio.h>
 #include <errno.h>
 #include <unistd.h>
 #include <poll.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
+#include <signal.h>
+
+static volatile sig_atomic_t stop_requested;
+
+static void handle_stop_signal(int signo)
+{
+    //(void)signo;
+    stop_requested=signo;
+}
 
 /*宏定义*/
 #define SERVER_IP "127.0.0.1" //服务器IP地址
@@ -16,6 +27,27 @@
 
 int main(void)
 {
+
+    //安装信号处理函数
+    struct sigaction sa={0};
+    sa.sa_handler=handle_stop_signal;
+    sigemptyset(&sa.sa_mask);
+    sa.sa_flags=0;
+
+    //绑定信号处理函数
+    if(sigaction(SIGINT,&sa,NULL)==-1)//interrupt:终端按Ctrl C
+    {
+        perror("sigaction SIGINT");
+        return 1;
+    }
+
+    if(sigaction(SIGTERM,&sa,NULL)==-1)//terminate:请求程序正常终止
+    {
+        perror("sigaction SITERM");
+        return 1;
+    }
+
+
     //开启服务器
     int listen_fd=socket(AF_INET,SOCK_STREAM,0);
     if(listen_fd==-1)
@@ -86,7 +118,7 @@ int main(void)
             ,SERVER_IP,SERVER_PORT);
      
     //等待连接
-    while(1)
+    while(stop_requested==0)
     {
         int ready=poll(fds,SLOT_COUNT,-1);//永久等待
         if(ready==-1)
@@ -231,6 +263,8 @@ int main(void)
         
     }
 
+    printf("\n[server] stop requested, cleaning up...\n");
+
     //清理资源
     for(int i=SLOT_CLIENT_BEGIN;i<SLOT_COUNT;i++)
     {
@@ -243,5 +277,14 @@ int main(void)
 
 
     close(listen_fd);
+    printf("[server] shutdown complete\n");
+    if(stop_requested==SIGINT)
+    {
+        printf("\n[exit] by SIGINT\n");
+    }
+    else if(stop_requested==SIGTERM)
+    {
+        printf("\n[exit] by SIGTERM\n");
+    }
     return 0;
 }
